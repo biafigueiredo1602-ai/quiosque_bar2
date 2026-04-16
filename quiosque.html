@@ -1,0 +1,249 @@
+<!DOCTYPE html> 
+
+<html lang="pt"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+
+    <title>Quiosque do Bar</title> 
+
+    <link rel="stylesheet" href="style.css"> 
+
+</head> 
+
+ 
+
+<body> 
+
+ 
+
+<h1>🍔 Quiosque do Bar</h1> 
+
+ 
+
+<!-- CATEGORIAS --> 
+
+<h2>Categorias</h2> 
+
+ 
+
+<button class="categoria" onclick="mostrarCategoria('padaria')">🥖 Padaria</button>
+<button class="categoria" onclick="mostrarCategoria('bebidas')">🧃 Bebidas</button>
+<button class="categoria" onclick="mostrarCategoria('aperitivos')">🍪 Aperitivos</button>
+ 
+
+<!-- PRODUTOS --> 
+
+<div id="produtos"></div> 
+
+ 
+
+<!-- CARRINHO --> 
+
+<h2>Carrinho</h2> 
+
+<ul id="carrinho"></ul> 
+
+<h3>Total: <span id="total">0</span> €</h3> 
+
+ 
+
+<!-- PAGAMENTO --> 
+
+<h2>Pagamento</h2> 
+
+<input type="text" id="cartao" placeholder="Passe o cartão" autofocus> 
+
+<button onclick="pagar()">Pagar</button> 
+
+ 
+
+<script> 
+
+let carrinho = []; 
+
+let total = 0; 
+
+ 
+
+// MOSTRAR PRODUTOS 
+
+function mostrarCategoria(categoria) { 
+
+    let div = document.getElementById("produtos"); 
+
+ 
+
+    if (categoria === "padaria") { 
+
+        div.innerHTML = ` 
+
+            <button onclick="addProduto('Tosta Mista', 0.80)"> 🥪Tosta Mista - 0.80€</button> 
+            <button onclick="addProduto('Torrada', 1.00)">🍞 Torrada - 1.00€</button>
+            <button onclick="addProduto('Pão com fiambre', 0.50)"> 🥪 Pão com fiambre - 0.50€</button>
+            <button onclick="addProduto('Pão com queijo', 0.50)"> 🥪 Pão com queijo - 0.50€</button>
+            <button onclick="addProduto('Pão com manteiga', 0.50)"> 🥪 Pão com manteiga - 0.50€</button>
+            <button onclick="addProduto('Pão', 0.10)"> 🥖 Pão - 0.10€</button>
+            <button onclick="addProduto('Meia Torrada', 0.50)"> 🍞 Meia torrada - 0.50€</button>
+             
+
+        `;  
+
+    } 
+
+ 
+
+    if (categoria === "bebidas") { 
+
+        div.innerHTML = ` 
+
+            <button onclick="addProduto('Néctar Laranja', 0.40)">🍹 Néctar Laranja - 0.40€</button> 
+            <button onclick="addProduto('Água 0.30L', 0.20)">💧 Água 0.30L - 0.20€</button> 
+            <button onclick="addProduto('Água 0.50L', 0.50)">💧 Água 0.50L - 0.50€</button> 
+            <button onclick="addProduto('Água 1.5L', 1.00)">💧 Água 1.5L - 1.00€</button> 
+            <button onclick="addProduto('Néctar Tutti Fruti', 0.40)">🍹Néctar Tutti Fruti - 0.40€</button> 
+            <button onclick="addProduto('Néctar Frutos Vermelhos', 0.40)">🍹 Néctar Frutos Vermelhos - 0.40€</button>
+        
+        `; 
+
+    } 
+
+ 
+
+    if (categoria === "aperitivos") { 
+
+        div.innerHTML = ` 
+
+            <button onclick="addProduto('Bolacha Maria', 0.80)"> 🍪 Bolacha Maria - 0.80€</button> 
+
+            <button onclick="addProduto('Bolacha Água e Sal', 0.20)"> 🥨Bolacha Água e Sal - 0.20€</button> 
+            <button onclick="addProduto('Queques', 0.80)"> 🧁 Queques - 0.80€</button>
+            <button onclick="addProduto('Barrinha de chocolate', 1.00)"> 🍫 Barinha de chocolate -1.00€</button>
+            <button onclick="addProduto('Tarte de Maçã', 0.90)"> 🥧 Tarte de Maçã - 0.90€</button>
+
+        `; 
+
+    } 
+
+} 
+
+ 
+
+// ADICIONAR PRODUTO 
+
+function addProduto(nome, preco) { 
+
+    carrinho.push({ nome, preco }); 
+
+    total += preco; 
+
+    atualizarCarrinho(); 
+
+} 
+
+ 
+
+// ATUALIZAR CARRINHO 
+
+function atualizarCarrinho() { 
+
+    let lista = document.getElementById("carrinho"); 
+
+    lista.innerHTML = ""; 
+
+ 
+
+    carrinho.forEach(item => { 
+
+        let li = document.createElement("li"); 
+
+        li.textContent = item.nome + " - " + item.preco.toFixed(2) + "€"; 
+
+        lista.appendChild(li); 
+
+    }); 
+
+ 
+
+    document.getElementById("total").textContent = total.toFixed(2); 
+
+} 
+
+ 
+
+// PAGAMENTO 
+
+function pagar() { 
+
+    let cartao = document.getElementById("cartao").value; 
+
+ 
+
+    if (cartao === "") { 
+
+        alert("Passe o cartão!"); 
+
+        return; 
+
+    } 
+
+ 
+
+    finalizarPedido(); 
+
+} 
+
+ 
+
+// FINALIZAR PEDIDO 
+
+function finalizarPedido() { 
+
+    let numeroPedido = Math.floor(Math.random() * 1000); 
+
+ 
+
+    let pedido = { 
+
+        numero: numeroPedido, 
+
+        itens: carrinho, 
+
+        total: total 
+
+    }; 
+
+ 
+
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || []; 
+
+    pedidos.push(pedido); 
+
+    localStorage.setItem("pedidos", JSON.stringify(pedidos)); 
+
+ 
+
+    alert("Pedido feito! Número: " + numeroPedido); 
+
+ 
+
+    carrinho = []; 
+
+    total = 0; 
+
+    atualizarCarrinho(); 
+
+} 
+
+</script> 
+
+ 
+
+</body> 
+
+</html> 
+
+ 
+
+ 

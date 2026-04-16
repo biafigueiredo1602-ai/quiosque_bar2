@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+
+<html lang="pt"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+
+    <title>Painel Funcionária</title> 
+    <link rel="stylesheet" href="style.css">
+</head> 
+
+<body> 
+
+ 
+
+<h1>📋 Pedidos</h1>
+
+<div id="listaPedidos"></div>
+
+ 
+
+<button onclick="carregarPedidos()">Atualizar</button> 
+
+ 
+
+<script> 
+
+function carregarPedidos() {
+    let lista = document.getElementById("listaPedidos");
+    lista.innerHTML = "";
+
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    pedidos.forEach((pedido, index) => {
+
+        let div = document.createElement("div");
+        div.classList.add("pedido");
+
+        let texto = `<h3>Pedido #${pedido.numero} - ${pedido.total.toFixed(2)}€</h3>`;
+
+        pedido.itens.forEach(item => {
+            texto += `<p>• ${item.nome} (${item.preco.toFixed(2)}€)</p>`;
+        });
+
+        texto += `<button onclick="removerPedido(${index})">🗑️ Concluir</button>`;
+
+        div.innerHTML = texto;
+        lista.appendChild(div);
+    });
+}
+
+function removerPedido(index) {
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    pedidos.splice(index, 1);
+
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+    carregarPedidos();
+}
+
+carregarPedidos();
+
+</script> 
+
+ 
+
+</body> 
+
+</html> 
+
+ 
