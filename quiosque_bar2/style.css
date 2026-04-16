@@ -1,0 +1,91 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #d4f1ff;
+}
+
+h1 {
+    background: #3EB489;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+.categoria {
+    background-color: #a4d8c5; /* verde */
+    color: white;
+}
+
+.categoria:hover {
+    background-color: #2e8b6f;
+}
+button {
+    margin: 10px;
+    padding: 15px 25px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* efeito ao passar o rato */
+button:hover {
+    background-color: #ffcc80;
+}
+
+/* botão selecionado */
+button.ativo {
+    background-color: #ff7a00;
+    color: white;
+}
+
+
+#produtos {
+    margin-top: 20px;
+}
+
+#carrinho {
+    list-style: none;
+    padding: 0;
+}
+
+input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+#listaPedidos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px;
+}
+
+.pedido {
+    background: rgb(224, 245, 243);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.pedido h3 {
+    margin: 0;
+    color: #3EB489;
+}
+
+.pedido button {
+    margin-top: 10px;
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.pedido button:hover {
+    background-color: #cc0000;
+}
