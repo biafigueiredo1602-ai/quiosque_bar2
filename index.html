@@ -160,8 +160,10 @@ function atualizarCarrinho() {
 
         let li = document.createElement("li"); 
 
-        li.innerHTML = item.nome + " - " + item.preco.toFixed(2) + "€ " +
-        `<button onclick="removerItem(${index})">❌</button>`;
+        li.innerHTML = `
+            ${item.nome} - ${item.preco.toFixed(2)}€
+            <button onclick="removerItem(${index})">❌</button>
+        `;
 
         lista.appendChild(li); 
 
@@ -170,7 +172,13 @@ function atualizarCarrinho() {
     document.getElementById("total").textContent = total.toFixed(2); 
 }
 </script>
-  
+<script>
+    function removerItem(index) {
+        total -= carrinho[index].preco;
+        carrinho.splice(index, 1);
+        atualizarCarrinho();
+}
+</script>
 <script>
 // PAGAMENTO
 function pagar() { 
@@ -213,13 +221,6 @@ function pagar() {
         location.reload();
     }, 3000);
 }
-</script>
-<script>
-    function removerItem(index) {
-        total -= carrinho[index].preco; // tirar preço
-        carrinho.splice(index, 1); // remover da lista
-        atualizarCarrinho(); // atualizar visual
-} 
 </script>
 <script>
 
