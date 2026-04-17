@@ -154,26 +154,21 @@ function addProduto(nome, preco) {
 function atualizarCarrinho() { 
 
     let lista = document.getElementById("carrinho"); 
-
     lista.innerHTML = ""; 
 
- 
-
-    carrinho.forEach(item => { 
+    carrinho.forEach((item, index) => { 
 
         let li = document.createElement("li"); 
 
-        li.textContent = item.nome + " - " + item.preco.toFixed(2) + "€"; 
+        li.innerHTML = item.nome + " - " + item.preco.toFixed(2) + "€ " +
+        `<button onclick="removerItem(${index})">❌</button>`;
 
         lista.appendChild(li); 
 
     }); 
 
- 
-
     document.getElementById("total").textContent = total.toFixed(2); 
-
-} 
+}
 </script>
   
 <script>
@@ -219,8 +214,13 @@ function pagar() {
     }, 3000);
 }
 </script>
- 
-
+<script>
+    function removerItem(index) {
+        total -= carrinho[index].preco; // tirar preço
+        carrinho.splice(index, 1); // remover da lista
+        atualizarCarrinho(); // atualizar visual
+} 
+</script>
 <script>
 
 // FINALIZAR PEDIDO 
