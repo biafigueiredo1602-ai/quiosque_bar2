@@ -178,26 +178,40 @@ function atualizarCarrinho() {
 // PAGAMENTO
 function pagar() { 
 
-    let cartao = document.getElementById("cartao").value; 
+    let numeroCartao = document.getElementById("cartao").value.trim(); 
+    let aluno = baseDados[numeroCartao];
 
- 
-
-    if (cartao === "") { 
-
+    if (numeroCartao === "") { 
         alert("Passe o cartão!"); 
-
         return; 
+    } 
 
-    }
-      
-    document.getElementById("infoAluno").textContent ="Pagamento feito! 💳 Saldo restante: " + aluno.saldo.toFixed(2) + "€";
+    if (!aluno) { 
+        alert("Cartão não reconhecido!"); 
+        return; 
+    } 
+
+    if (total > aluno.saldo) { 
+        alert("Saldo insuficiente!"); 
+        return; 
+    } 
+
+    // retirar saldo
+    aluno.saldo -= total; 
+
+    // mostrar resultado no ecrã
+    document.getElementById("infoAluno").textContent =
+    "✅ Pagamento feito! Saldo restante: " + aluno.saldo.toFixed(2) + "€";
+
+    // limpar input
     document.getElementById("cartao").value = "";
 
-    finalizarPedido(); 
+    // esperar antes de finalizar e atualizar
     setTimeout(() => {
-    location.reload();
-}, 2000);
-} 
+        finalizarPedido();
+        location.reload();
+    }, 2000);
+}
 </script>
  
 
