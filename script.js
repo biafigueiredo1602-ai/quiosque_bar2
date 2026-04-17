@@ -8,7 +8,7 @@ function mostrarCategoria(categoria) {
 
         div.innerHTML = ` 
 
-            <button onclick="addProduto('🥪Tosta Mista', 0.80)"> 
+            <button onclick="addProduto('🥪Tosta Mista', 0.80, this)"> 
 
                 🥪 Tosta Mista - 0.80€ 
 
@@ -16,7 +16,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('🍞 Torrada', 1.00)"> 
+            <button onclick="addProduto('🍞 Torrada', 1.00, this)"> 
 
                 🍞 Torrada - 1.00€ 
 
@@ -24,7 +24,7 @@ function mostrarCategoria(categoria) {
 
             
 
-             <button onclick="addProduto('🥪Pão com Fiambre', 0.50)"> 
+             <button onclick="addProduto('🥪Pão com Fiambre', 0.50, this)"> 
 
                 🥪 Pão com Fiambre - 0.50€ 
 
@@ -32,7 +32,7 @@ function mostrarCategoria(categoria) {
 
  
 
-             <button onclick="addProduto('🥪Pão com Queijo', 0.50)"> 
+             <button onclick="addProduto('🥪Pão com Queijo', 0.50, this)"> 
 
                 🥪 Pão com Queijo - 0.50€ 
 
@@ -40,7 +40,7 @@ function mostrarCategoria(categoria) {
 
  
 
-             <button onclick="addProduto('🧈 Pão com Manteiga', 0.50)"> 
+             <button onclick="addProduto('🧈 Pão com Manteiga', 0.50, this)"> 
 
                 🧈 Pão com Manteiga - 0.50€ 
 
@@ -48,7 +48,7 @@ function mostrarCategoria(categoria) {
 
  
 
-             <button onclick="addProduto('🥖Pão', 0.10)"> 
+             <button onclick="addProduto('🥖Pão', 0.10,this)"> 
 
                 🥖 Pão - 0.10€ 
 
@@ -56,7 +56,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('🍞Meia Torrada', 0.50)"> 
+            <button onclick="addProduto('🍞Meia Torrada', 0.50, this)"> 
 
                 🍞 Meia Torrada - 0.50€ 
 
@@ -70,13 +70,13 @@ function mostrarCategoria(categoria) {
 
         div.innerHTML = ` 
 
-            <button onclick="addProduto('💧Água 0.30', 0.20)"> 
+            <button onclick="addProduto('💧Água 0.30', 0.20, this)"> 
 
                 💧 Água 0,3L - 0.20€ 
 
  
 
-            </button><button onclick="addProduto('💧Água 0,5l', 0.50)"> 
+            </button><button onclick="addProduto('💧Água 0,5l', 0.50, this)"> 
 
                 💧 Água 0,5L - 0,50 € 
 
@@ -84,7 +84,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('💧 Água 1,5l', 1.00)"> 
+            <button onclick="addProduto('💧 Água 1,5l', 1.00, this)"> 
 
                 💧Água 1,5l - 1.00€ 
 
@@ -92,7 +92,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('🍹Néctar Laranja', 0.40)"> 
+            <button onclick="addProduto('🍹Néctar Laranja', 0.40, this)"> 
 
                 🍹 Néctar Laranja - 0.40€ 
 
@@ -100,7 +100,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('🍹Néctar Tutti Fruti', 0.40)"> 
+            <button onclick="addProduto('🍹Néctar Tutti Fruti', 0.40, this)"> 
 
                 🍹 Néctar Tutti Fruti - 0.40€ 
 
@@ -108,7 +108,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('🍹 Néctar Frutos Vermelhos', 0.40)"> 
+            <button onclick="addProduto('🍹 Néctar Frutos Vermelhos', 0.40, this)"> 
 
                 🍹 Néctar Frutos Fruti - 0.40€ 
 
@@ -122,7 +122,7 @@ function mostrarCategoria(categoria) {
 
         div.innerHTML = ` 
 
-            <button onclick="addProduto('🍪 Bolacha Maria', 0.80)"> 
+            <button onclick="addProduto('🍪 Bolacha Maria', 0.80, this)"> 
 
                 🍪 Bolacha Maria - 0.80€ 
 
@@ -130,7 +130,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('🥨 Bolacha água&sal', 0.20)"> 
+            <button onclick="addProduto('🥨 Bolacha água&sal', 0.20, this)"> 
 
                 🥨 Bolacha água&sal - 0.20€ 
 
@@ -138,7 +138,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('🧁 Queques', 0.80)"> 
+            <button onclick="addProduto('🧁 Queques', 0.80, this)"> 
 
                 🧁 Queques - 0.80€ 
 
@@ -146,7 +146,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('🍫 Barrinha de chocolate', 1.00)"> 
+            <button onclick="addProduto('🍫 Barrinha de chocolate', 1.00, this)"> 
 
                 🍫 Barrinha de chocolate - 1.00€ 
 
@@ -154,7 +154,7 @@ function mostrarCategoria(categoria) {
 
  
 
-            <button onclick="addProduto('🥧Tarte Maçã', 0.90)"> 
+            <button onclick="addProduto('🥧Tarte Maçã', 0.90, this)"> 
 
                 🥧 Tarte Maçã - 0.90€ 
 
@@ -240,8 +240,6 @@ function finalizarPedido() {
 
     }; 
 
- 
-
     // buscar pedidos antigos 
 
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || []; 
@@ -271,6 +269,21 @@ function finalizarPedido() {
     atualizarCarrinho(); 
 
 } 
+
+
+function mostrarSaldo() {
+    let numeroCartao = document.getElementById("cartao").value;
+    let aluno = baseDados[numeroCartao];
+
+    let info = document.getElementById("infoAluno");
+
+    if (aluno) {
+        info.textContent = "Aluno: " + aluno.nome + 
+        " | Saldo: " + aluno.saldo.toFixed(2) + "€";
+    } else {
+        info.textContent = "Cartão não reconhecido";
+    }
+}
 
  function pagar() { 
 
