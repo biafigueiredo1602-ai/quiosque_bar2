@@ -242,7 +242,12 @@ function finalizarPedido() {
 <script>
 function mostrarSaldo() {
     let cartao = document.getElementById("cartao").value;
-    document.getElementById("infoAluno").textContent = "Cartão inserido: " + cartao;
+
+    // simulação de saldo fixo
+    let saldo = 10;
+
+    document.getElementById("infoAluno").textContent =
+        "Cartão: " + cartao + " | Saldo: " + saldo.toFixed(2) + "€";
 }
 
 </script> 
