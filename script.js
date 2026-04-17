@@ -260,8 +260,6 @@ function finalizarPedido() {
 
     alert("Pedido feito! Número: " + numeroPedido); 
 
- 
-
     carrinho = []; 
 
     total = 0; 
@@ -315,7 +313,7 @@ function mostrarSaldo() {
 
  
 
-    if (total > aluno.saldo) { 
+    if (aluno.saldo < total) { 
 
         alert("Saldo insuficiente!"); 
 
@@ -330,10 +328,11 @@ function mostrarSaldo() {
  
 
     alert("Pagamento feito! Saldo restante: " + aluno.saldo.toFixed(2) + "€"); 
-
- 
-
-    finalizarPedido(); 
+     
+     finalizarPedido();
+     carrinho = [];
+     total = 0;
+     atualizarCarrinho();
 
 } 
 
