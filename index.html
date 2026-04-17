@@ -188,12 +188,15 @@ function pagar() {
 
         return; 
 
-    } 
-
- 
+    }
+      
+    document.getElementById("infoAluno").textContent ="Pagamento feito! 💳 Saldo restante: " + aluno.saldo.toFixed(2) + "€";
+    document.getElementById("cartao").value = "";
 
     finalizarPedido(); 
-
+    setTimeout(() => {
+    location.reload();
+}, 2000);
 } 
 </script>
  
