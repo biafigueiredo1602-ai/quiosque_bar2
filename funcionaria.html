@@ -25,7 +25,10 @@
  
 
 <script> 
-
+if (pedidos.length === 0) {
+    lista.innerHTML = "<p>Sem pedidos no momento</p>";
+    return;
+}
 function carregarPedidos() {
     let lista = document.getElementById("listaPedidos");
     lista.innerHTML = "";
