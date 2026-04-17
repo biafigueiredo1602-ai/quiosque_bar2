@@ -241,13 +241,19 @@ function finalizarPedido() {
 </script>
 <script>
 function mostrarSaldo() {
-    let cartao = document.getElementById("cartao").value;
+    let numeroCartao = document.getElementById("cartao").value.trim();
 
-    // simulação de saldo fixo
-    let saldo = 10;
+    let aluno = baseDados[numeroCartao];
 
-    document.getElementById("infoAluno").textContent =
-        "Cartão: " + cartao + " | Saldo: " + saldo.toFixed(2) + "€";
+    let info = document.getElementById("infoAluno");
+
+    if (aluno) {
+        info.textContent = "Aluno: " + aluno.nome + 
+        " | Saldo: " + aluno.saldo.toFixed(2) + "€";
+    } else {
+        info.textContent = "";
+    }
+    console.log(numeroCartao);
 }
 
 </script> 
