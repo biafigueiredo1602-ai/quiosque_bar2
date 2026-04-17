@@ -1,39 +1,14 @@
-<!DOCTYPE html> 
-
-<html lang="pt"> 
-
-<head> 
-
-    <meta charset="UTF-8"> 
-
-    <title>Painel Funcionária</title> 
-    <link rel="stylesheet" href="style.css">
-</head> 
-
-<body> 
-
- 
-
-<h1>📋 Pedidos</h1>
-
-<div id="listaPedidos"></div>
-
- 
-
-<button onclick="carregarPedidos()">Atualizar</button> 
-
- 
-
-<script> 
-if (pedidos.length === 0) {
-    lista.innerHTML = "<p>Sem pedidos no momento</p>";
-    return;
-}
+<script>
 function carregarPedidos() {
     let lista = document.getElementById("listaPedidos");
     lista.innerHTML = "";
 
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    if (pedidos.length === 0) {
+        lista.innerHTML = "<p>Sem pedidos no momento</p>";
+        return;
+    }
 
     pedidos.forEach((pedido, index) => {
 
@@ -64,13 +39,4 @@ function removerPedido(index) {
 }
 
 carregarPedidos();
-
-</script> 
-
- 
-
-</body> 
-
-</html> 
-
- 
+</script>
