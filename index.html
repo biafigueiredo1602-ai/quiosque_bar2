@@ -51,11 +51,8 @@
 <!-- PAGAMENTO --> 
 
 <h2>Pagamento</h2>
-
-<input type="text" id="cartao" placeholder="Passe o cartão" oninput="mostrarSaldo()">
-
+<input type="text" id="cartao" oninput="mostrarSaldo()">
 <p id="infoAluno"></p>
-
 <button onclick="pagar()">Pagar</button>
 
  
@@ -199,18 +196,22 @@ function pagar() {
     // retirar saldo
     aluno.saldo -= total; 
 
-    // mostrar resultado no ecrã
-    document.getElementById("infoAluno").textContent =
-    "✅ Pagamento feito! Saldo restante: " + aluno.saldo.toFixed(2) + "€";
+    // MOSTRAR RESULTADO
+    let info = document.getElementById("infoAluno");
+    info.innerHTML = "✅ Pagamento feito!<br>Saldo restante: " + aluno.saldo.toFixed(2) + "€";
 
-    // limpar input
+    // limpar campo
     document.getElementById("cartao").value = "";
 
-    // esperar antes de finalizar e atualizar
-    setTimeout(() => {
-        finalizarPedido();
+    // limpar carrinho
+    carrinho = [];
+    total = 0;
+    atualizarCarrinho();
+
+    // atualizar página depois
+    setTimeout(function() {
         location.reload();
-    }, 2000);
+    }, 3000);
 }
 </script>
  
