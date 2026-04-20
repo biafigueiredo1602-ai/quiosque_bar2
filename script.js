@@ -73,13 +73,18 @@ function atualizarCarrinho() {
 // GUARDAR PEDIDO
 function finalizarPedido() { 
 
-    let numeroPedido = Math.floor(Math.random() * 1000); 
+    if (carrinho.length === 0) {
+        alert("Carrinho vazio!");
+        return;
+    }
+
+    let numeroPedido = Math.floor(Math.random() * 1000);
 
     let pedido = { 
         numero: numeroPedido, 
-        itens: [...carrinho], // ✅ SUPER IMPORTANTE
+        itens: carrinho.map(item => ({ ...item })), 
         total: total 
-    }; 
+    };
 
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || []; 
 
