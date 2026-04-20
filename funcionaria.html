@@ -26,41 +26,39 @@
 
 <script> 
 
-function carregarPedidos() { 
-    let lista = document.getElementById("listaPedidos"); 
-    lista.innerHTML = ""; 
+function mostrarPedidos() {
+    let lista = document.getElementById("listaPedidos");
+    lista.innerHTML = "";
 
-    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || []; 
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
-    if (pedidos.length === 0) { 
-        lista.innerHTML = "<p>Sem pedidos.</p>"; 
-        return; 
-    } 
+    if (pedidos.length === 0) {
+        lista.innerHTML = "<p>Sem pedidos.</p>";
+        return;
+    }
 
-    pedidos.forEach((pedido, index) => { 
-        let div = document.createElement("div"); 
-        div.classList.add("pedido"); 
+    pedidos.forEach((pedido, index) => {
+        let div = document.createElement("div");
 
-        let total = Number(pedido.total || 0); 
+        div.innerHTML = `
+            <p><strong>Pedido #${pedido.numero}</strong></p>
+            <p>Total: €${pedido.total}</p>
+            <button onclick="removerPedido(${index})">Eliminar</button>
+            <hr>
+        `;
 
-        let texto = `
-            <h3>Pedido #${pedido.numero} - ${total.toFixed(2)}€</h3>
-        `; 
-
-        (pedido.itens || []).forEach(item => { 
-            texto += `
-                <p>• ${item.nome ?? "Sem nome"} (${Number(item.preco || 0).toFixed(2)}€)</p>
-            `; 
-        }); 
-
-        texto += `
-            <button onclick="removerPedido(${index})">🗑️ Concluir</button>
-        `; 
-
-        div.innerHTML = texto; 
-        lista.appendChild(div); 
-    }); 
+        lista.appendChild(div);
+    });
 }
-</script>
+
+function removerPedido(index) {
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    pedidos.splice(index, 1);
+
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+    mostrarPedidos();
+}</script>
 </body>
 </html>
