@@ -73,16 +73,11 @@ function atualizarCarrinho() {
 // GUARDAR PEDIDO
 function finalizarPedido() { 
 
-    if (carrinho.length === 0) {
-        alert("Carrinho vazio!");
-        return;
-    }
-
     let numeroPedido = Math.floor(Math.random() * 1000); 
 
     let pedido = { 
         numero: numeroPedido, 
-        itens: [...carrinho], // ✅ cópia REAL
+        itens: [...carrinho], // ✅ SUPER IMPORTANTE
         total: total 
     }; 
 
@@ -111,38 +106,36 @@ function mostrarSaldo() {
 // PAGAR
 function pagar() { 
 
-    let numeroCartao = document.getElementById("cartao").value; 
+    let numeroCartao = document.getElementById("cartao").value.trim(); 
+    let aluno = baseDados[numeroCartao];
 
     if (numeroCartao === "") { 
         alert("Passe o cartão!"); 
         return; 
     } 
 
-    let aluno = baseDados[numeroCartao]; 
-
     if (!aluno) { 
         alert("Cartão não reconhecido!"); 
         return; 
     } 
 
-    if (aluno.saldo < total) { 
+    if (total > aluno.saldo) { 
         alert("Saldo insuficiente!"); 
         return; 
     } 
 
-    if (carrinho.length === 0) {
-        alert("Carrinho vazio!");
-        return;
-    }
-
     aluno.saldo -= total; 
 
+    let info = document.getElementById("infoAluno");
+    info.innerHTML = "✅ Pagamento feito!<br>Saldo restante: " + aluno.saldo.toFixed(2) + "€";
+
+    document.getElementById("cartao").value = "";
+
+    // 🔥 GUARDA PRIMEIRO
     finalizarPedido();
 
-    // ✅ limpar SÓ aqui
+    // 🔥 SÓ DEPOIS LIMPA
     carrinho = [];
     total = 0;
     atualizarCarrinho();
-
-    alert("Pagamento feito!");
 }
