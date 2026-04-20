@@ -16,52 +16,37 @@
 
 <!-- ⚠️ SCRIPT NO FIM DO BODY -->
 <script>
-function carregarPedidos() {
+function mostrarPedidos() {
     let lista = document.getElementById("listaPedidos");
-
-    if (!lista) {
-        console.log("ERRO: listaPedidos não encontrado");
-        return;
-    }
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
     lista.innerHTML = "";
 
-    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+    pedidos.forEach(pedido => {
 
-    if (pedidos.length === 0) {
-        lista.innerHTML = "<p>Sem pedidos no momento</p>";
-        return;
-    }
-
-    pedidos.forEach((pedido, index) => {
         let div = document.createElement("div");
-        div.classList.add("pedido");
 
-        let texto = `<h3>Pedido #${pedido.numero} - ${pedido.total.toFixed(2)}€</h3>`;
+        let html = `<h3>Pedido #${pedido.numero}</h3>`;
 
-        pedido.itens.forEach(item => {
-            texto += `<p>• ${item.nome} (${item.preco.toFixed(2)}€)</p>`;
-        });
+        // 🚨 aqui estava o erro normalmente
+        if (pedido.itens && pedido.itens.length > 0) {
+            pedido.itens.forEach(item => {
+                html += `<p>${item.nome} - ${item.preco.toFixed(2)}€</p>`;
+            });
+        } else {
+            html += `<p><i>Sem itens</i></p>`;
+        }
 
-        texto += `<button onclick="removerPedido(${index})">🗑️ Concluir</button>`;
+        html += `<strong>Total: ${pedido.total.toFixed(2)}€</strong>`;
 
-        div.innerHTML = texto;
+        div.innerHTML = html;
+
         lista.appendChild(div);
     });
 }
 
-function removerPedido(index) {
-    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-
-    pedidos.splice(index, 1);
-
-    localStorage.setItem("pedidos", JSON.stringify(pedidos));
-
-    carregarPedidos();
-}
-
-// carrega automaticamente ao abrir a página
-carregarPedidos();
+// carregar automaticamente
+mostrarPedidos();
 </script>
 
 </body>
