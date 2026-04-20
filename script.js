@@ -82,7 +82,7 @@ function finalizarPedido() {
 
     let pedido = { 
         numero: numeroPedido, 
-        itens: [...carrinho], // ✅ cópia correta
+        itens: [...carrinho], // ✅ cópia REAL
         total: total 
     }; 
 
@@ -93,8 +93,7 @@ function finalizarPedido() {
     localStorage.setItem("pedidos", JSON.stringify(pedidos)); 
 
     alert("Pedido feito! Número: " + numeroPedido); 
-} 
-
+}
 // MOSTRAR SALDO
 function mostrarSaldo() {
     let numeroCartao = document.getElementById("cartao").value;
@@ -132,7 +131,7 @@ function pagar() {
     } 
 
     if (carrinho.length === 0) {
-        alert("Não tens produtos no carrinho!");
+        alert("Carrinho vazio!");
         return;
     }
 
@@ -140,10 +139,10 @@ function pagar() {
 
     finalizarPedido();
 
-    // limpar carrinho
+    // ✅ limpar SÓ aqui
     carrinho = [];
     total = 0;
     atualizarCarrinho();
 
-    alert("Pagamento feito! Saldo restante: " + aluno.saldo.toFixed(2) + "€"); 
+    alert("Pagamento feito!");
 }
