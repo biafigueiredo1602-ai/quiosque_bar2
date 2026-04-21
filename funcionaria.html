@@ -15,13 +15,15 @@
 <button onclick="carregarPedidos()">Atualizar</button>
 
 <!-- 🔥 SCRIPT NO FIM -->
-<script>
 
+<script>
 function carregarPedidos() {
     let lista = document.getElementById("listaPedidos");
     lista.innerHTML = "";
 
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    console.log(pedidos); // 👈 IMPORTANTE PARA VER
 
     if (pedidos.length === 0) {
         lista.innerHTML = "<p>Sem pedidos.</p>";
@@ -34,12 +36,17 @@ function carregarPedidos() {
 
         let html = `
             <h3>Pedido #${pedido.numero}</h3>
-            <p>Total: ${pedido.total.toFixed(2)}€</p>
+            <p>Total: ${pedido.total}€</p>
         `;
 
-        pedido.itens.forEach(item => {
-            html += `<p>• ${item.nome} (${item.preco.toFixed(2)}€)</p>`;
-        });
+        // 🔥 VERIFICA SE EXISTEM ITENS
+        if (pedido.itens && pedido.itens.length > 0) {
+            pedido.itens.forEach(item => {
+                html += `<p>• ${item.nome} (${item.preco}€)</p>`;
+            });
+        } else {
+            html += `<p>⚠️ Sem itens</p>`;
+        }
 
         html += `<button onclick="removerPedido(${index})">🗑️ Concluir</button><hr>`;
 
@@ -50,18 +57,10 @@ function carregarPedidos() {
 
 function removerPedido(index) {
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-
     pedidos.splice(index, 1);
-
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
-
     carregarPedidos();
 }
 
-// 🔥 carregar automaticamente ao abrir
 carregarPedidos();
-
 </script>
-
-</body>
-</html>
