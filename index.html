@@ -211,11 +211,13 @@ function pagar() {
     // limpar campo
     document.getElementById("cartao").value = "";
 
+    finalizarPedido();
+    
+
     // limpar carrinho
     carrinho = [];
     total = 0;
     atualizarCarrinho();
-    finalizarPedido();
     // atualizar página depois
     setTimeout(function() {
         location.reload();
