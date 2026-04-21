@@ -25,7 +25,8 @@ function carregarPedidos() {
 
         html += `<button onclick="removerPedido(${index})">🗑️ Concluir</button><hr>`;
 
-        div.innerHTML = html;
+        div.innerHTML = html
+        div.classList.add("pedido");
         lista.appendChild(div);
     });
 }
