@@ -23,7 +23,7 @@ function carregarPedidos() {
 
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
-    console.log(pedidos); // 👈 IMPORTANTE PARA VER
+    console.log(pedidos);
 
     if (pedidos.length === 0) {
         lista.innerHTML = "<p>Sem pedidos.</p>";
@@ -34,16 +34,30 @@ function carregarPedidos() {
 
         let div = document.createElement("div");
 
+        // 🔥 garantir total correto
+        let totalFormatado = Number(pedido.total).toFixed(2);
+
         let html = `
             <h3>Pedido #${pedido.numero}</h3>
-            <p>Total: ${pedido.total}€</p>
+            <p><strong>Total:</strong> ${totalFormatado}€</p>
         `;
 
-        // 🔥 VERIFICA SE EXISTEM ITENS
+        // 🔥 AGRUPAR ITENS IGUAIS
         if (pedido.itens && pedido.itens.length > 0) {
+
+            let agrupados = {};
+
             pedido.itens.forEach(item => {
-                html += `<p>• ${item.nome} (${item.preco}€)</p>`;
+                if (!agrupados[item.nome]) {
+                    agrupados[item.nome] = 0;
+                }
+                agrupados[item.nome]++;
             });
+
+            for (let nome in agrupados) {
+                html += `<p>• ${nome} x${agrupados[nome]}</p>`;
+            }
+
         } else {
             html += `<p>⚠️ Sem itens</p>`;
         }
@@ -54,7 +68,6 @@ function carregarPedidos() {
         lista.appendChild(div);
     });
 }
-
 function removerPedido(index) {
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
     pedidos.splice(index, 1);
