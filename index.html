@@ -229,19 +229,11 @@ function finalizarPedido() {
 
     let numeroPedido = Math.floor(Math.random() * 1000); 
 
- 
-
     let pedido = { 
-
         numero: numeroPedido, 
-
-        itens: carrinho, 
-
+        itens: [...carrinho], // 🔥 CORREÇÃO
         total: total 
-
     }; 
-
- 
 
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || []; 
 
@@ -249,20 +241,12 @@ function finalizarPedido() {
 
     localStorage.setItem("pedidos", JSON.stringify(pedidos)); 
 
- 
-
     alert("Pedido feito! Número: " + numeroPedido); 
 
- 
-
     carrinho = []; 
-
     total = 0; 
-
     atualizarCarrinho(); 
-
-}
-</script>
+}</script>
 <script>
 function mostrarSaldo() {
     let numeroCartao = document.getElementById("cartao").value.trim();
