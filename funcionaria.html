@@ -1,32 +1,23 @@
-<!DOCTYPE html> 
-
-<html lang="pt"> 
-
-<head> 
-
-    <meta charset="UTF-8"> 
-
-    <title>Painel Funcionária</title> 
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel Funcionária</title>
     <link rel="stylesheet" href="style.css">
-</head> 
+</head>
 
-<body> 
-
- 
+<body>
 
 <h1>📋 Pedidos</h1>
 
 <div id="listaPedidos"></div>
 
- 
+<button onclick="carregarPedidos()">Atualizar</button>
 
-<button onclick="carregarPedidos()">Atualizar</button> 
+<!-- 🔥 SCRIPT NO FIM -->
+<script>
 
- 
-
-<script> 
-
-function mostrarPedidos() {
+function carregarPedidos() {
     let lista = document.getElementById("listaPedidos");
     lista.innerHTML = "";
 
@@ -38,15 +29,21 @@ function mostrarPedidos() {
     }
 
     pedidos.forEach((pedido, index) => {
+
         let div = document.createElement("div");
 
-        div.innerHTML = `
-            <p><strong>Pedido #${pedido.numero}</strong></p>
-            <p>Total: €${pedido.total}</p>
-            <button onclick="removerPedido(${index})">Eliminar</button>
-            <hr>
+        let html = `
+            <h3>Pedido #${pedido.numero}</h3>
+            <p>Total: ${pedido.total.toFixed(2)}€</p>
         `;
 
+        pedido.itens.forEach(item => {
+            html += `<p>• ${item.nome} (${item.preco.toFixed(2)}€)</p>`;
+        });
+
+        html += `<button onclick="removerPedido(${index})">🗑️ Concluir</button><hr>`;
+
+        div.innerHTML = html;
         lista.appendChild(div);
     });
 }
@@ -58,7 +55,13 @@ function removerPedido(index) {
 
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
-    mostrarPedidos();
-}</script>
+    carregarPedidos();
+}
+
+// 🔥 carregar automaticamente ao abrir
+carregarPedidos();
+
+</script>
+
 </body>
 </html>
