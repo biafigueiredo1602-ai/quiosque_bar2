@@ -234,7 +234,7 @@ function finalizarPedido() {
     let pedido = { 
         numero: numeroPedido, 
         itens: [...carrinho], // 🔥 CORREÇÃO
-        total: total 
+        total: Number(total.toFixed(2))
     }; 
 
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || []; 
